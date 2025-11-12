@@ -1,14 +1,9 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
-TARGET = program
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp=.o)
-all: $(TARGET)
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+CXXFLAGS = -Wall -Wextra -std=c++17 -O2
+PRACTICES = practice1 practice2 practice3 practice4 practice5 practice6 practice7
+all: $(PRACTICES)
+%: %.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $<
+.PHONY: clean
 clean:
-	rm -f $(OBJS) $(TARGET)
-run: all
-	./$(TARGET)
+	rm -f $(PRACTICES)

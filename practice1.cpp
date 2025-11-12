@@ -5,16 +5,21 @@ using namespace std;
 
 class Matrix{
     private:
-        int** matrix_a;
-        int** matrix_b;
+        int** matrix;
         int n;
 
     public:
+        Matrix(int size) : n(size) {
+            matrix = new int*[n];
+            for (int i = 0; i < n; i++){
+                matrix[i] = new int[n];
+            }
+        }
+
         void readFromFile(ifstream& file){
             string line;
-            file >> n;
-            matrix_a = new int*[n];
-            matrix_b = new int*[n];
+
+            matrix = new int*[n];
 
             while(getline(file, line)){
                 if(!line.empty()){
@@ -24,37 +29,19 @@ class Matrix{
 
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
-                    file >> matrix_a[i][j];
-                }
-            }
-
-            while(getline(file, line)){
-                if(!line.empty()){
-                    break;
-                }
-            }
-
-            for(int i = 0; i < n; i++){
-                for(int j = 0; j < n; j++){
-                    file >> matrix_b[i][j];
+                    file >> matrix[i][j];
                 }
             }
         }
 
-        void display_matrices(){
+        void display_matrix(){
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
-                    cout << matrix_a[i][j];
+                    cout << matrix[i][j];
                 }
                 cout << endl;
             }
             cout << endl;
-            for(int i = 0; i < n; i++){
-                for(int j = 0; j < n; j++){
-                    cout << matrix_b[i][j];
-                }
-                cout << endl;
-            }
         }
 };
 
@@ -62,6 +49,7 @@ class Executive{
     private:
         string filename;
         ifstream file;
+        int n;
     public:
         void run(){
             while(1){
@@ -72,10 +60,19 @@ class Executive{
                 cout << "Invalid file. Please try again." << endl;
             }
 
-            Matrix matrix_pair;
-            matrix_pair.readFromFile(file);
+            file >> n;
 
-            matrix_pair.display_matrices();
+
+            Matrix A(n);
+            Matrix B(n);
+
+            A.readFromFile(file);
+            B.readFromFile(file);
+
+            A.display_matrix();
+            B.display_matrix();
+
+            file.close();
         }
 };
 

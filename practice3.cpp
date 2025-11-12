@@ -9,7 +9,14 @@ class Matrix{
         int n;
 
     public:
-        void readFromFile(ifstream& file, int n){
+        Matrix(int size) : n(size) {
+            matrix = new int*[n];
+            for (int i = 0; i < n; i++){
+                matrix[i] = new int[n];
+            }
+        }
+
+        void readFromFile(ifstream& file){
             string line;
 
             matrix = new int*[n];
@@ -38,7 +45,7 @@ class Matrix{
         }
 
         Matrix operator*(const Matrix& other) const{
-            Matrix product;
+            Matrix product(n);
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
                     product.matrix[i][j] = 0;
@@ -68,15 +75,16 @@ class Executive{
 
             file >> n;
 
-            Matrix A;
-            Matrix B;
-            Matrix C;
+            Matrix A(n);
+            Matrix B(n);
             
-            A.readFromFile(file, n);
-            B.readFromFile(file, n);
+            A.readFromFile(file);
+            B.readFromFile(file);
 
-            C = A * B;
+            Matrix C = A * B;
             C.display_matrix();
+
+            file.close();
         }
 };
 

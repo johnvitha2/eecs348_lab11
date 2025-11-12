@@ -9,7 +9,14 @@ class Matrix{
         int n;
 
     public:
-        void readFromFile(ifstream& file, int n){
+        Matrix(int size) : n(size) {
+            matrix = new int*[n];
+            for (int i = 0; i < n; i++){
+                matrix[i] = new int[n];
+            }
+        }
+
+        void readFromFile(ifstream& file){
             string line;
 
             matrix = new int*[n];
@@ -71,11 +78,11 @@ class Executive{
 
             file >> n;
 
-            Matrix A;
-            Matrix B;
+            Matrix A(n);
+            Matrix B(n);
             
-            A.readFromFile(file, n);
-            B.readFromFile(file, n);
+            A.readFromFile(file);
+            B.readFromFile(file);
 
             while(1){
                 cout << "Which matrix would you like to perform the operation on? Enter A or B: ";
@@ -90,6 +97,8 @@ class Executive{
                     cout << "Invalid matrix selection. Please try again.";
                 }
             }
+
+            file.close();
         }
 };
 

@@ -28,14 +28,6 @@ class Matrix{
         }
 
         void readFromFile(ifstream& file){
-            string line;
-
-            while(getline(file, line)){
-                if(!line.empty()){
-                    break;
-                }
-            }
-
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
                     file >> matrix[i][j];
@@ -46,7 +38,7 @@ class Matrix{
         void display_matrix(){
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
-                    cout << matrix[i][j];
+                    cout << matrix[i][j] << " ";
                 }
                 cout << endl;
             }
@@ -74,6 +66,7 @@ class Executive{
         string filename;
         ifstream file;
         int n;
+        string line;
         char user_choice;
     public:
         void run(){
@@ -86,6 +79,12 @@ class Executive{
             }
 
             file >> n;
+
+            while(getline(file, line)){
+                if(!line.empty()){
+                    break;
+                }
+            }
 
             Matrix A(n);
             Matrix B(n);
@@ -103,7 +102,7 @@ class Executive{
                     cout << "Diagonal sum: " << B.get_diagonal_sum();
                     break;
                 } else {
-                    cout << "Invalid matrix selection. Please try again.";
+                    cout << "Invalid matrix selection. Please try again." << endl;
                 }
             }
 

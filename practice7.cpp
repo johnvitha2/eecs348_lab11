@@ -28,14 +28,6 @@ class Matrix{
         }
 
         void readFromFile(ifstream& file){
-            string line;
-
-            while(getline(file, line)){
-                if(!line.empty()){
-                    break;
-                }
-            }
-
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
                     file >> matrix[i][j];
@@ -46,7 +38,7 @@ class Matrix{
         void display_matrix(){
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
-                    cout << matrix[i][j];
+                    cout << matrix[i][j] << " ";
                 }
                 cout << endl;
             }
@@ -63,6 +55,7 @@ class Executive{
         string filename;
         ifstream file;
         int n;
+        string line;
         int row_index;
         int col_index;
         int val;
@@ -78,6 +71,12 @@ class Executive{
             }
 
             file >> n;
+
+            while(getline(file, line)){
+                if(!line.empty()){
+                    break;
+                }
+            }
 
             Matrix A(n);
             Matrix B(n);
@@ -114,6 +113,19 @@ class Executive{
                     break;
                 }
             }
+
+            while(1){
+                cout << "Enter a value: ";
+                if (!(cin >> val)){
+                    cout << "Invalid value. Please enter an integer." << endl;
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                    continue;
+                } else {
+                    break;
+                }
+            }
+
 
             while(1){
                 cout << "Which matrix would you like to perform the operation on? Enter A or B: ";

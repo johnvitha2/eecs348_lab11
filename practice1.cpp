@@ -71,8 +71,11 @@ class Executive{
                 if(file) break;
                 cout << "Invalid file. Please try again." << endl;
             }
+
             Matrix matrix_pair;
             matrix_pair.readFromFile(file);
+
+            matrix_pair.display_matrices();
         }
 };
 

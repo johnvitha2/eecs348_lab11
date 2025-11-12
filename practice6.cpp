@@ -19,8 +19,6 @@ class Matrix{
         void readFromFile(ifstream& file){
             string line;
 
-            matrix = new int*[n];
-
             while(getline(file, line)){
                 if(!line.empty()){
                     break;
@@ -44,20 +42,21 @@ class Matrix{
             cout << endl;
         }
 
-        int get_diagonal_sum(){
-            int sum = 0;
-            int col1_index = 0;
-            int col2_index = n-1;
-
+        Matrix swap_cols(int col1, int col2){
+            Matrix C(n);
             for(int i = 0; i < n; i++){
-                sum += matrix[i][col1_index] + matrix[i][col2_index];
-
-                col1_index++;
-                col2_index--;
+                for(int j = 0; j < n; j++){
+                    if(j == col1){
+                        C.matrix[i][j] = matrix[i][col2];
+                    } else if(j == col2){
+                        C.matrix[i][j] = matrix[i][col1];
+                    } else {
+                        C.matrix[i][j] = matrix[i][j];
+                    }
+                }
             }
-
-            return sum;
-        }
+            return C;
+        }  
 };
 
 class Executive{
@@ -65,6 +64,8 @@ class Executive{
         string filename;
         ifstream file;
         int n;
+        int col1_index;
+        int col2_index;
         char user_choice;
     public:
         void run(){
@@ -85,18 +86,50 @@ class Executive{
             B.readFromFile(file);
 
             while(1){
+                cout << "Enter the first column-index: ";
+                if (!(cin >> col1_index)){
+                    cout << "Invalid column-index. Please enter an integer." << endl;
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                    continue;
+                }
+                if(col1_index < 0 or col1_index >= n ){
+                    cout << "Invalid column-index. Please enter an index within the matrix bounds." << endl;
+                } else {
+                    break;
+                }
+            }
+
+            while(1){
+                cout << "Enter the second column-index: ";
+                if (!(cin >> col2_index)){
+                    cout << "Invalid column-index. Please enter an integer." << endl;
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                    continue;
+                }
+                if(col2_index < 0 or col2_index >= n ){
+                    cout << "Invalid column-index. Please enter an index within the matrix bounds." << endl;
+                } else {
+                    break;
+                }
+            }
+
+            while(1){
                 cout << "Which matrix would you like to perform the operation on? Enter A or B: ";
                 cin >> user_choice;
                 if(toupper(user_choice) == 'A'){
-                    cout << "Diagonal sum: " << A.get_diagonal_sum();
+                    Matrix C = A.swap_cols(col1_index, col2_index);
+                    C.display_matrix();
                     break;
                 } else if (toupper(user_choice) == 'B'){
-                    cout << "Diagonal sum: " << B.get_diagonal_sum();
+                    Matrix C = B.swap_cols(col1_index, col2_index);
+                    C.display_matrix();
                     break;
                 } else {
-                    cout << "Invalid matrix selection. Please try again.";
+                    cout << "Invalid matrix selection. Please try again." << endl;
                 }
-            }
+            } 
 
             file.close();
         }

@@ -30,8 +30,6 @@ class Matrix{
         void readFromFile(ifstream& file){
             string line;
 
-            matrix = new int*[n];
-
             while(getline(file, line)){
                 if(!line.empty()){
                     break;

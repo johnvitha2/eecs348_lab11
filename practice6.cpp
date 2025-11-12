@@ -1,3 +1,14 @@
+/*
+* EECS 348 Lab 11 Practice 6
+* Matrix Operations
+* Make a copy of a matrix with user-specified columns swapped and display it
+* Collaborators: None
+* Sources: None
+* Author: John Vitha
+* KU ID: 3158626
+* Creation date: 11/11/2025
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

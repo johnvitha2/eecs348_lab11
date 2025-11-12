@@ -1,3 +1,14 @@
+/*
+* EECS 348 Lab 11 Practice 4
+* Matrix Operations
+* Output the sum of all elements on the two main diagonals of a matrix
+* Collaborators: None
+* Sources: None
+* Author: John Vitha
+* KU ID: 3158626
+* Creation date: 11/11/2025
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

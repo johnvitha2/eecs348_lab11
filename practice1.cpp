@@ -1,3 +1,14 @@
+/*
+* EECS 348 Lab 11 Practice 1
+* Matrix Operations
+* Read values from a file into two nxn matrices and display them
+* Collaborators: None
+* Sources: None
+* Author: John Vitha
+* KU ID: 3158626
+* Creation date: 11/11/2025
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

@@ -1,3 +1,14 @@
+/*
+* EECS 348 Lab 11 Practice 7
+* Matrix Operations
+* Update user-specified row and column indices of a matrix with a user-specified value, defaulting to indices 0, 0 and value=100
+* Collaborators: None
+* Sources: None
+* Author: John Vitha
+* KU ID: 3158626
+* Creation date: 11/11/2025
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

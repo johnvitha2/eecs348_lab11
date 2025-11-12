@@ -37,14 +37,17 @@ class Matrix{
             cout << endl;
         }
 
-        Matrix operator+(const Matrix& other) const{
-            Matrix sum;
+        Matrix operator*(const Matrix& other) const{
+            Matrix product;
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
-                    sum.matrix[i][j] = matrix[i][j] + other.matrix[i][j];
+                    product.matrix[i][j] = 0;
+                    for(int k = 0; k < n; k++){
+                        product.matrix[i][j] += matrix[i][k] * other.matrix[k][j];
+                    }
                 }
             }
-            return sum;
+            return product;
         }
 };
 
@@ -72,7 +75,7 @@ class Executive{
             A.readFromFile(file, n);
             B.readFromFile(file, n);
 
-            C = A + B;
+            C = A * B;
             C.display_matrix();
         }
 };
